@@ -14,20 +14,22 @@ const publicDirectoryPath = path.join(__dirname,'../public');
 app.use(express.static(publicDirectoryPath))
 
 
-let count = 0;
+
 io.on('connection', (socket) => {
 	console.log('new websocket is connected');
+
+	socket.broadcast.emit('message', 'a new user has joined.')
 	
-	/*	socket.emit('countUpdated', count)
+	socket.on('sendMessage', (message) => {
+		io.emit('message', message)
+	})
+	
+	socket.on('disconnect', () => {
+		io.emit('message', 'a user has just left the chat.')
+	})
 
-	socket.on('increment', () => {
-		count++;
-		//socket.emit('countUpdated', count)
-		io.emit('countUpdated', count)
-	})*/
-
-	const message = "welcome to your chatt application"
-	socket.emit('welcomeMsg', message)
+	/*const message = "welcome to your chatt application"
+	socket.emit('welcomeMsg', message) */
 })
 
 
