@@ -1,6 +1,8 @@
 const express = require('express')
 const path = require('path')
 const http = require('http')
+const Filter = require('bad-words');
+
 const socketio = require('socket.io');
 
 
@@ -20,12 +22,26 @@ io.on('connection', (socket) => {
 
 	//socket.broadcast.emit('message', 'a new user has joined.')
 	socket.broadcast.emit('message', 'A new user has just joined the chat.')
-	socket.on('sendMessage', (message) => {
+	socket.on('sendMessage', (message, callback) => {
+		
+		const filter = new Filter()
+		
+		if (filter.isProfane(message)) {
+			return callback("we're sorry that profanity is not allowed.")
+		}
+
 		io.emit('message', message)
+		callback()
 	})
 	
 	socket.on('disconnect', () => {
 		io.emit('message', 'a user has just left the chat.')
+	})
+
+
+	socket.on('senLocation', (coords, callback) => {
+		io.emit('message', `https://google.com/maps?q=${coords.latitude},${coords.longitude}`)
+		callback()
 	})
 
 	/*const message = "welcome to your chatt application"
