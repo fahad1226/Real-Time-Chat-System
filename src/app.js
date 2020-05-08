@@ -18,8 +18,8 @@ app.use(express.static(publicDirectoryPath))
 io.on('connection', (socket) => {
 	console.log('new websocket is connected');
 
-	socket.broadcast.emit('message', 'a new user has joined.')
-	
+	//socket.broadcast.emit('message', 'a new user has joined.')
+	socket.broadcast.emit('message', 'A new user has just joined the chat.')
 	socket.on('sendMessage', (message) => {
 		io.emit('message', message)
 	})
