@@ -6,39 +6,28 @@
 	<link rel="icon" href="/img/favicon.png">
 	<link rel="stylesheet" href="/css/styles.min.css">
 </head>
-<style>
-	.container {
-		margin-right: 10%;
-		margin-left: 10%;
-		padding-top: 2%;
-	}
-</style>
+
 <body>
 	<h1>Chatt App</h1>
 
-	<div class="container" id="messages"></div>
+	<div id="messages"></div>
+	<form id="message-form" autocomplete="off">
+		<input type="text" name="message" placeholder="Message">
+		<button>send</button>	
+	</form>
+	<button id="send-location">send location</button>
 
+	<script id="message-template" type="text/html">
+		<div>
+			<p> {{ createdAt }} -- {{ message }}</p>
+		</div>
+	</script>
 
-	<div class="container">
-		<form id="message-form" autocomplete="off">
-			<input type="text" name="message" placeholder="Message">
-			<button>send</button>	
-		</form>
-		<button id="send-location">send location</button>
-
-		<script id="message-template" type="text/html">
-			<div>
-				<p> {{ createdAt }} -- {{ message }}</p>
-			</div>
-		</script>
-
-
-		<script id="location-message-template" type="text/html">
-			<div>
-				<p> {{ createdAt }} -- <a href=" {{ url }} " target="_blank">my current location</a> </p>
-			</div>
-		</script>
-	</div>
+	<script id="location-message-template" type="text/html">
+		<div>
+			<p> {{ createdAt }} -- <a href=" {{ url }} " target="_blank">my current location</a> </p>
+		</div>
+	</script>
 
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.1/mustache.min.js"></script>
