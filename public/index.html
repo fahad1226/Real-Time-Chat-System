@@ -8,24 +8,44 @@
 </head>
 
 <body>
-	<h1>Chatt App</h1>
+	
+	<div class="chat">
+		<div class="chat__sidebar">
+			
+		</div>
+		<div class="chat__main">
+			<div id="messages" class="chat__messages"></div>
 
-	<div id="messages"></div>
-	<form id="message-form" autocomplete="off">
-		<input type="text" name="message" placeholder="Message">
-		<button>send</button>	
-	</form>
-	<button id="send-location">send location</button>
+			<div class="compose">
+				<form id="message-form" autocomplete="off">
+					<input type="text" name="message" placeholder="Message">
+					<button>send</button>	
+				</form>
+				<button id="send-location">send location</button>
+			</div>
+			
+
+		</div>
+	</div>
+
 
 	<script id="message-template" type="text/html">
-		<div>
-			<p> {{ createdAt }} -- {{ message }}</p>
+		<div class="message">
+			<p>
+				<span class="message__name">some user</span>
+				<span class="message__meta"> {{ createdAt }} </span>
+			</p>
+			<p>{{ message }}</p>
 		</div>
 	</script>
 
 	<script id="location-message-template" type="text/html">
-		<div>
-			<p> {{ createdAt }} -- <a href=" {{ url }} " target="_blank">my current location</a> </p>
+		<div class="message">
+			<p>
+				<span class="message__name">some user</span>
+				<span class="message__meta"> {{ createdAt }} </span>
+			</p>
+			<p>  <a href=" {{ url }} " target="_blank">my current location</a> </p>
 		</div>
 	</script>
 
